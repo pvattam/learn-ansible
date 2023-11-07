@@ -1,0 +1,51 @@
+- name: Demo Variables
+  hosts: localhost
+  vars:
+    URL: sample.com
+  tasks:
+    - name: Print URL variable
+      ansible.builtin.debug:
+        msg: "(( URL ))"
+# Declaring variables on tasks level
+- name: Demo on tasks Variables
+  hosts: localhost
+  tasks:
+    - name: Print URL variable
+      ansible.builtin.debug:
+        msg: "(( URL1 ))"
+      vars:
+        URL1: sample.com
+    - name: Print URL variable
+      ansible.builtin.debug:
+        msg: "(( URL2 ))"
+      vars:
+        URL2: sample.com
+
+# Declaring variables on command level
+- name: Demo on tasks Variables
+  hosts: localhost
+  vars:
+    URL1: example.com
+    URL2: example.com
+  tasks:
+    - name: Print URL variable
+      ansible.builtin.debug:
+        msg: "(( URL1 ))"
+      vars:
+        URL1: sample.com
+    - name: Print URL variable
+      ansible.builtin.debug:
+        msg: "(( URL2 ))"
+      vars:
+        URL2: sample.com
+
+# REGISTERING A VARIABLES
+- name: Register variable example
+  hosts: localhost
+  tasks:
+    - name: get uptime of server
+      ansible.builtin.shell: uptime
+      register: OUT
+    - name: print OUT var
+      ansible.builtin.debug:
+        msg: "{{ OUT }}"
