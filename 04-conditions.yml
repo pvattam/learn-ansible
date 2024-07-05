@@ -1,0 +1,12 @@
+- name: Demo on conditions
+  hosts: localhost
+  tasks:
+    - name: print linux
+      ansible.builtin.debug:
+        msg: Hello, Linux
+      when: os_name == "linux"
+
+    - name: print unix
+      ansible.builtin.debug:
+        msg: Hello, Unix
+      when: os_name == "unix"
